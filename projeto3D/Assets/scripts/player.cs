@@ -16,7 +16,9 @@ public class player : MonoBehaviour
     private Animator anim;
     private bool isWalking;
     private bool waitFor;
+    private bool isHitting;
     public List<Transform> enemyList = new List<Transform>();
+    public bool isDead;
 
     public Transform cam;
     Vector3 moveDirection;
@@ -36,8 +38,12 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
-        GetMouseInput();
+        if (!isDead)
+        {
+            Move();
+            GetMouseInput();
+        }
+        
     }
 
     void Move()
@@ -112,7 +118,7 @@ public class player : MonoBehaviour
 
     IEnumerator Attack()
     {
-        if (!waitFor)
+        if (!waitFor && !isHitting)
         {
             waitFor = true;
             anim.SetBool("attacking", true);
@@ -161,26 +167,28 @@ public class player : MonoBehaviour
         totalHealth -= damege;
         if (totalHealth > 0)
         {
-            // inimigo ainda tá vivo
+            // player ainda tá vivo
             StopCoroutine("Attack");
             anim.SetInteger("transition", 3);
-            
+            isHitting = true;
             StartCoroutine("RecoveryFromHit");
 
         }
         else
         {
-            //inimigo morre
-            anim.SetTrigger("Die");
+            //player morre
+            isDead = true;
+            anim.SetTrigger("die");
         }
     }
 
     IEnumerator RecoveryFromHit()
     {
         yield return new WaitForSeconds(1f);
-        anim.SetBool("Walk Forward", false);
-        anim.SetBool("Bite Attack", false);
-       
+        anim.SetInteger("transition", 0);
+        isHitting = false;
+        anim.SetBool("attacking", false);
+
 
     }
 

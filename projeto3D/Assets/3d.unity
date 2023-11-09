@@ -553,7 +553,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 82351883}
-  m_LocalRotation: {x: 0.38768137, y: 0.000000028447799, z: -0.000000011964373, w: 0.92179346}
+  m_LocalRotation: {x: 0.3876814, y: -0.000000012304969, z: 0.0000000051751363, w: 0.92179346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1468,7 +1468,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 387837029}
-  m_LocalRotation: {x: 0.35394144, y: -0.00000002787315, z: 0.000000010548278, w: 0.9352676}
+  m_LocalRotation: {x: 0.3539414, y: 4.5995144e-16, z: 1.6267272e-15, w: 0.9352676}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4758,7 +4758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400120, guid: d1569800832d2bc419e28a8efa258d51, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 983.25
+      value: 985.75
       objectReference: {fileID: 0}
     - target: {fileID: 400120, guid: d1569800832d2bc419e28a8efa258d51, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4766,7 +4766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400120, guid: d1569800832d2bc419e28a8efa258d51, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 846.56
+      value: 846.42
       objectReference: {fileID: 0}
     - target: {fileID: 400120, guid: d1569800832d2bc419e28a8efa258d51, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4816,10 +4816,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalHealth: 100
-  attackDamage: 0
+  attackDamage: 50
   movementSpeed: 0
   lookRadius: 3.69
   colliderRadius: 2
+  rotationSpeed: 0
   player: {fileID: 0}
 --- !u!195 &1926309767
 NavMeshAgent:
@@ -5407,7 +5408,9 @@ MonoBehaviour:
   gravity: 150
   colliderRadius: 1.23
   damege: 20
+  totalHealth: 100
   enemyList: []
+  isDead: 0
   cam: {fileID: 0}
   smoothRotTime: 0.5
   turnSmoothVelocity: 0
