@@ -10,9 +10,12 @@ public class player : MonoBehaviour
     public float speed;
     public float gravity;
     public float colliderRadius;
+    public float damege = 20;
+    public float totalHealth;
     
     private Animator anim;
     private bool isWalking;
+    private bool waitFor;
     public List<Transform> enemyList = new List<Transform>();
 
     public Transform cam;
@@ -109,24 +112,34 @@ public class player : MonoBehaviour
 
     IEnumerator Attack()
     {
-        anim.SetBool("attacking", true);
-        anim.SetInteger("transition", 2);
-
-        yield return new WaitForSeconds(0.4f);
-
-        GetEnemiesList();
-
-        foreach (Transform e in enemyList)
+        if (!waitFor)
         {
-            Debug.Log(e.name);
+            waitFor = true;
+            anim.SetBool("attacking", true);
+            anim.SetInteger("transition", 2);
+
+            yield return new WaitForSeconds(0.4f);
+
+            GetEnemiesList();
+
+            foreach (Transform e in enemyList)
+            {
+                // aplica dano ao inimigo
+                CombatEnemy enemy = e.GetComponent<CombatEnemy>();
+
+                if (enemy != null)
+                {
+                    enemy.GetHit(damege);
+                }
+            }
+
+            yield return new WaitForSeconds(1f);
+
+            anim.SetInteger("transition", 0);
+            anim.SetBool("attacking", false);
+            waitFor = false;
+
         }
-        
-        yield return new WaitForSeconds(1f);
-        
-        anim.SetInteger("transition", 0);
-        anim.SetBool("attacking", false);
-            
-        
     }
 
     void GetEnemiesList()
@@ -140,6 +153,34 @@ public class player : MonoBehaviour
                 enemyList.Add(c.transform);
             }
         }
+
+    }
+    
+    public void GetHit(float damege)
+    {
+        totalHealth -= damege;
+        if (totalHealth > 0)
+        {
+            // inimigo ainda tá vivo
+            StopCoroutine("Attack");
+            anim.SetInteger("transition", 3);
+            
+            StartCoroutine("RecoveryFromHit");
+
+        }
+        else
+        {
+            //inimigo morre
+            anim.SetTrigger("Die");
+        }
+    }
+
+    IEnumerator RecoveryFromHit()
+    {
+        yield return new WaitForSeconds(1f);
+        anim.SetBool("Walk Forward", false);
+        anim.SetBool("Bite Attack", false);
+       
 
     }
 

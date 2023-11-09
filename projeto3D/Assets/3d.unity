@@ -553,7 +553,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 82351883}
-  m_LocalRotation: {x: 0.3876814, y: 0.000000018529843, z: -0.00000000779315, w: 0.92179346}
+  m_LocalRotation: {x: 0.38768137, y: 0.000000028447799, z: -0.000000011964373, w: 0.92179346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1468,7 +1468,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 387837029}
-  m_LocalRotation: {x: 0.35394144, y: 0.00000002787315, z: -0.000000010548278, w: 0.9352676}
+  m_LocalRotation: {x: 0.35394144, y: -0.00000002787315, z: 0.000000010548278, w: 0.9352676}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4748,6 +4748,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spiderling Venom-Purple
       objectReference: {fileID: 0}
+    - target: {fileID: 100120, guid: d1569800832d2bc419e28a8efa258d51, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 400120, guid: d1569800832d2bc419e28a8efa258d51, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -4811,7 +4815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 512bf33db3259a34592d3ccac8501c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalHealth: 0
+  totalHealth: 100
   attackDamage: 0
   movementSpeed: 0
   lookRadius: 3.69
@@ -5402,6 +5406,7 @@ MonoBehaviour:
   speed: 4
   gravity: 150
   colliderRadius: 1.23
+  damege: 20
   enemyList: []
   cam: {fileID: 0}
   smoothRotTime: 0.5
