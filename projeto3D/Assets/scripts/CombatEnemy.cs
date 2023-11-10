@@ -30,8 +30,14 @@ public class CombatEnemy : MonoBehaviour
     private bool hiting;
     private bool waitFor;
     private bool playerIsDead;
+
+    [Header("WayPoints")] 
+    public List<Transform> wayPoints = new List<Transform>();
+    public int currentPathIndex;
+    public float pathDistance;
     
-    
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -79,12 +85,30 @@ public class CombatEnemy : MonoBehaviour
             else
             {
                 // fora do raio de ataque 
-                agent.isStopped = true;
+               // agent.isStopped = true;
                 anim.SetBool("Walk Forward", false);
                 walking = false;
                 attacking = false;
+                MoveToWayPoint();
             }
         }
+    }
+
+    void MoveToWayPoint()
+    {
+        if (wayPoints.Count >0)
+        {
+            float distance = Vector3.Distance(wayPoints[currentPathIndex].position, transform.position);
+            agent.destination = wayPoints[currentPathIndex].position;
+            if (distance <= pathDistance)
+            {
+                // parte para o proximo ponto.
+                currentPathIndex = UnityEngine.Random.Range(0, wayPoints.Count);
+            }
+            anim.SetBool("Walk Forward",true);
+            walking = true;
+        }
+        
     }
     
     IEnumerator Attack()
